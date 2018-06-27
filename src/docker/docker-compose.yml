@@ -7,16 +7,16 @@ services:
     ports:
       - "5432:5432"
     environment:
-      - DB_USER=gitlab
+      - DB_USER=gitee
       - DB_PASS=password
       - DB_NAME=gitlabhq_production
       - DB_EXTENSION=pg_trgm
     volumes:
-      - /srv/docker/gitlab/postgresql:/var/lib/postgresql
+      - /srv/docker/gitee/postgresql:/var/lib/postgresql
 
   gitlab:
     restart: always
-    image: sameersbn/gitlab:9.4.1
+    image: sameersbn/gitee:9.4.1
     depends_on:
       - redis
       - postgresql
@@ -29,7 +29,7 @@ services:
       - DB_ADAPTER=postgresql
       - DB_HOST=postgresql
       - DB_PORT=5432
-      - DB_USER=gitlab
+      - DB_USER=gitee
       - DB_PASS=password
       - DB_NAME=gitlabhq_production
 
@@ -80,13 +80,13 @@ services:
       - IMAP_SSL=true
       - IMAP_STARTTLS=false
     volumes:
-      - /srv/docker/gitlab/gitlab:/home/git/data
+      - /srv/docker/gitee/gitee:/home/git/data
 
   redis:
     restart: always
     image: sameersbn/redis:latest
     volumes:
-      - /srv/docker/gitlab/redis:/var/lib/redis
+      - /srv/docker/gitee/redis:/var/lib/redis
 
   jenkins:
     restart: always

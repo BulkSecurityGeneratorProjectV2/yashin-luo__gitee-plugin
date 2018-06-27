@@ -1,0 +1,16 @@
+package com.dabsquared.giteejenkins.trigger.handler.note;
+
+import com.dabsquared.giteejenkins.gitee.hook.model.NoteHook;
+import com.dabsquared.giteejenkins.trigger.filter.BranchFilter;
+import com.dabsquared.giteejenkins.trigger.filter.MergeRequestLabelFilter;
+import hudson.model.Job;
+
+/**
+ * @author Robin Müller
+ */
+class NopNoteHookTriggerHandler implements NoteHookTriggerHandler {
+    @Override
+    public void handle(Job<?, ?> job, NoteHook hook, boolean ciSkip, BranchFilter branchFilter, MergeRequestLabelFilter mergeRequestLabelFilter) {
+        // nothing to do
+    }
+}

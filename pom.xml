@@ -13,10 +13,10 @@
     <findbugs.failOnError>false</findbugs.failOnError>
   </properties>
 
-  <artifactId>gitlab-plugin</artifactId>
+  <artifactId>gitee-plugin</artifactId>
   <version>1.5.7-SNAPSHOT</version>
-  <name>GitLab Plugin</name>
-  <url>https://wiki.jenkins-ci.org/display/JENKINS/GitLab+Plugin</url>
+  <name>Gitee Plugin</name>
+  <!--<url>https://wiki.jenkins-ci.org/display/JENKINS/GitLab+Plugin</url>-->
   <packaging>hpi</packaging>
 
   <licenses>
@@ -48,9 +48,9 @@
   </distributionManagement>
 
   <scm>
-    <connection>scm:git:ssh://github.com:jenkinsci/gitlab-plugin.git</connection>
-    <developerConnection>scm:git:git@github.com:jenkinsci/gitlab-plugin.git</developerConnection>
-    <url>https://github.com/jenkinsci/gitlab-plugin</url>
+    <connection>scm:git:ssh://gitee.com:yashin/Gitee-Plugin.git</connection>
+    <developerConnection>scm:git:git@gitee.com:yashin/Gitee-Plugin.git</developerConnection>
+    <url>https://gitee.com/yashin/Gitee-Plugin</url>
     <tag>HEAD</tag>
   </scm>
   <!-- get every artifact through repo.jenkins-ci.org, which proxies all the artifacts that we need -->
@@ -307,7 +307,7 @@
     <profile>
       <id>integration-test</id>
       <properties>
-        <gitlab.version>8.17.4</gitlab.version>
+        <gitee.version>8.17.4</gitee.version>
         <postgres.version>9.5-1</postgres.version>
       </properties>
       <build>
@@ -332,8 +332,8 @@
                 <configuration>
                   <systemProperties>
                     <property>
-                      <name>gitlab.http.port</name>
-                      <value>${gitlab.http.port}</value>
+                      <name>gitee.http.port</name>
+                      <value>${gitee.http.port}</value>
                     </property>
                     <property>
                       <name>postgres.port</name>
@@ -357,10 +357,10 @@
                 <configuration>
                   <ports>
                     <port>
-                      <name>gitlab.http.port</name>
+                      <name>gitee.http.port</name>
                     </port>
                     <port>
-                      <name>gitlab.ssh.port</name>
+                      <name>gitee.ssh.port</name>
                     </port>
                     <port>
                       <name>postgres.port</name>
@@ -380,12 +380,12 @@
               <images>
                 <image>
                   <name>sameersbn/postgresql:${postgres.version}</name>
-                  <alias>it-gitlab-postgres</alias>
+                  <alias>it-gitee-postgres</alias>
                   <run>
                     <namingStrategy>alias</namingStrategy>
                     <env>
-                      <DB_NAME>gitlabhq_production</DB_NAME>
-                      <DB_USER>gitlab</DB_USER>
+                      <DB_NAME>giteehq_production</DB_NAME>
+                      <DB_USER>gitee</DB_USER>
                       <DB_PASS>password</DB_PASS>
                       <DB_EXTENSION>pg_trgm</DB_EXTENSION>
                     </env>
@@ -396,38 +396,38 @@
                 </image>
                 <image>
                   <name>sameersbn/redis</name>
-                  <alias>it-gitlab-redis</alias>
+                  <alias>it-gitee-redis</alias>
                   <run>
                     <namingStrategy>alias</namingStrategy>
                   </run>
                 </image>
                 <image>
-                  <name>sameersbn/gitlab:${gitlab.version}</name>
-                  <alias>it-gitlab-gitlab</alias>
+                  <name>sameersbn/gitee:${gitee.version}</name>
+                  <alias>it-gitee-gitee</alias>
                   <run>
                     <namingStrategy>alias</namingStrategy>
                     <links>
-                      <link>it-gitlab-postgres:postgresql</link>
-                      <link>it-gitlab-redis:redisio</link>
+                      <link>it-gitee-postgres:postgresql</link>
+                      <link>it-gitee-redis:redisio</link>
                     </links>
                     <ports>
-                      <port>${gitlab.http.port}:80</port>
-                      <port>${gitlab.ssh.port}:22</port>
+                      <port>${gitee.http.port}:80</port>
+                      <port>${gitee.ssh.port}:22</port>
                     </ports>
                     <env>
                       <DEBUG>false</DEBUG>
                       <TZ>Asia/Kolkata</TZ>
-                      <GITLAB_TIMEZONE>Kolkata</GITLAB_TIMEZONE>
-                      <GITLAB_PORT>${gitlab.http.port}</GITLAB_PORT>
-                      <GITLAB_SSH_PORT>${gitlab.ssh.port}</GITLAB_SSH_PORT>
-                      <GITLAB_SECRETS_DB_KEY_BASE>long-and-random-alpha-numeric-string</GITLAB_SECRETS_DB_KEY_BASE>
-                      <GITLAB_SECRETS_SECRET_KEY_BASE>long-and-random-alphanumeric-string</GITLAB_SECRETS_SECRET_KEY_BASE>
-                      <GITLAB_SECRETS_OTP_KEY_BASE>long-and-random-alpha-numeric-string</GITLAB_SECRETS_OTP_KEY_BASE>
-                      <GITLAB_HOST>172.17.0.1</GITLAB_HOST>
+                      <GITEE_TIMEZONE>Kolkata</GITEE_TIMEZONE>
+                      <GITEE_PORT>${gitee.http.port}</GITEE_PORT>
+                      <GITEE_SSH_PORT>${gitee.ssh.port}</GITEE_SSH_PORT>
+                      <GITEE_SECRETS_DB_KEY_BASE>long-and-random-alpha-numeric-string</GITEE_SECRETS_DB_KEY_BASE>
+                      <GITEE_SECRETS_SECRET_KEY_BASE>long-and-random-alphanumeric-string</GITEE_SECRETS_SECRET_KEY_BASE>
+                      <GITEE_SECRETS_OTP_KEY_BASE>long-and-random-alpha-numeric-string</GITEE_SECRETS_OTP_KEY_BASE>
+                      <GITEE_HOST>172.17.0.1</GITEE_HOST>
                     </env>
                     <wait>
                       <http>
-                        <url>http://localhost:${gitlab.http.port}/</url>
+                        <url>http://localhost:${gitee.http.port}/</url>
                       </http>
                       <time>120000</time>
                     </wait>
