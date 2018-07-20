@@ -1,4 +1,4 @@
-## This repository was move to jenkinsci https://github.com/jenkinsci/gitee-plugin
+## This repository has been moved to jenkinsci https://github.com/jenkinsci/gitee-plugin
 
 # Table of Contents
 - [Introduction](#introduction)
