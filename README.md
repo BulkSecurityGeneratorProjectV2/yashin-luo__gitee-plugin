@@ -1,3 +1,5 @@
+## This repository was move to jenkinsci https://github.com/jenkinsci/gitee-plugin
+
 # Table of Contents
 - [Introduction](#introduction)
 - [User support](#user-support)
